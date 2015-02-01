@@ -14,8 +14,8 @@ CC = avr-gcc
 
 CFLAGS = -W -Wall -Wextra -pedantic -std=c11 -Os
 
-# `char` should be `unsigned char`, and bitfields should have unsigned type as well.
-CFLAGS += -funsigned-char -funsigned-bitfields
+# `char` should be `unsigned char`.
+CFLAGS += -funsigned-char
 
 # Do not leave holes in structures, this may save us some RAM. Docs mention that this generates
 # suboptimal code: this is true only on platforms which need to have aligned access to the RAM.
