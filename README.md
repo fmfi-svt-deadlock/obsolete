@@ -14,6 +14,8 @@ After compiling the firmware you can flash it with your favorite tool.
 
 We are using the opensource tool [AVRDUDE](http://www.nongnu.org/avrdude/). `make` targets for this tool are prepared in the Makefile for convenience. The default configuration presumes using an AVR ISP MkII programmer connected to a USB port, but you can use any programmer which is supported by AVRDUDE, just edit the variables `AVRDUDE_PRG` and `AVRDUDE_PRG_PORT`.
 
+But it would be too easy if AVRDUDE supported ATTiny841, would't it? ;). The configuration file adding support for this MCU can be found here: https://github.com/fmfi-svt-gate/avr-toolchain-patches/tree/master/avrdude-config
+
 The prepared targets are:
 
 - `chip_erase`
