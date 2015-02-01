@@ -1,0 +1,18 @@
+# Object files
+*.o
+*.obj
+*.elf
+
+# Generated dependency files
+*.d
+
+# Libraries
+.a
+
+# Shared objects
+*.so
+*.so.*
+
+# Executables
+*.out
+*.hex
