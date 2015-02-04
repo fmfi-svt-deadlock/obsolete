@@ -86,7 +86,7 @@ print_size: main.elf
 
 clean:
 	find . -name '*.[od]' -exec rm -f '{}' \;
-	rm -f *.elf
+	rm -f *.elf *.hex *.eep
 
 # include the generated dependencies
 -include $(OBJS:.o=.d)

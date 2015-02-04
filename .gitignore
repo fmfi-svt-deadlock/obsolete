@@ -16,3 +16,6 @@
 # Executables
 *.out
 *.hex
+
+# EEPROM file
+*.eep
