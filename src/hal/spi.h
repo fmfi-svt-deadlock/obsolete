@@ -5,6 +5,6 @@
 #define __SPI_H
 
 // TODO: stub
-uint8_t spi_init();
+uint8_t hal_spi_init();
 
 #endif

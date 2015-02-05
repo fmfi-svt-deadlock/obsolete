@@ -4,6 +4,6 @@
 #define __SPKR_H
 
 // TODO: stub
-uint8_t spkr_init();
+uint8_t hal_spkr_init();
 
 #endif

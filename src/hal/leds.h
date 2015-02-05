@@ -4,6 +4,6 @@
 #define __LEDS_H
 
 // TODO: stub
-uint8_t leds_init();
+uint8_t hal_leds_init();
 
 #endif
