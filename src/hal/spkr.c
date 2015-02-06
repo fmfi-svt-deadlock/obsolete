@@ -2,7 +2,6 @@
 #include <util/delay.h>
 #include "hal.h"
 #include "spkr.h"
-#include "../bit_manip.h"
 
 uint8_t hal_spkr_init() {
 	// TODO This must wait for the new HW revision

@@ -1,6 +1,5 @@
 #include "hal.h"
 #include "leds.h"
-#include "../bit_manip.h"
 
 uint8_t hal_leds_init() {
 	
