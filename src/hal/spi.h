@@ -4,7 +4,7 @@
 #ifndef __SPI_H
 #define __SPI_H
 
-// TODO: stub
 uint8_t hal_spi_init();
+uint8_t hal_spi_transfer(uint8_t data);
 
 #endif

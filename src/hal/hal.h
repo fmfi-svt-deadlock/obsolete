@@ -54,6 +54,11 @@
 // This module uses peripheral SPI
 // Correct values for communication with RFID-RC522 are hardcoded in the spi.c
 // (If the RFID module changes rewrite would be necessary anyway)
+#define SPI_DDR        DDRA
+#define SPI_PORT       PORTA
+#define SPI_MOSI_PIN   6
+#define SPI_SCK_PIN    4
+#define SPI_SS_PIN     7
 
 // ------------------------------------------------------ //
 
