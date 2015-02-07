@@ -13,9 +13,9 @@ __attribute__((OS_main)) int main(void) {
     recv = hal_spi_transfer(0x00);  // Dummy byte to receive data
 
     if (recv == 0x20) {
-        hal_leds_set_status(bit(HAL_FLAG_RED_LED));
-    } else {
         hal_leds_set_status(bit(HAL_FLAG_GREEN_LED));
+    } else {
+        hal_leds_set_status(bit(HAL_FLAG_RED_LED));
     }
 
 }

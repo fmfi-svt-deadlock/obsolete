@@ -18,11 +18,11 @@
 // LED connections are fully configurable by the defines below:
 #define LED_R_DDR   DDRB
 #define LED_R_PORT  PORTB
-#define LED_R_PIN   0
+#define LED_R_PIN   2
 
 #define LED_G_DDR   DDRB
 #define LED_G_PORT  PORTB
-#define LED_G_PIN   2
+#define LED_G_PIN   0
 
 #define LED_B_DDR   DDRA
 #define LED_B_PORT  PORTA
