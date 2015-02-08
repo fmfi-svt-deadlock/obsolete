@@ -26,12 +26,11 @@
 
 #define LED_B_DDR   DDRA
 #define LED_B_PORT  PORTA
-#define LED_B_PIN   3
+#define LED_B_PIN   0
 
 // # Speaker
 // The speaker must be connected to TOCC2 (PORTA 3) pin.
 // To change this, rewrite spkr.c
-// (TODO: This actually is not the case for RevA board, therefore the Speaker module is unimplemented yet)
 // DO NOT change these defines:
 #define SPKR_DDR   DDRA
 #define SPKR_PORT  PORTA
