@@ -2,19 +2,17 @@
 #include <util/delay.h>
 #include "hal/hal.h"
 
-void callback() {
-    hal_leds_set_status(hal_leds_get_status() & ~bit(HAL_FLAG_BLUE_LED));
+void recv(uint8_t data) {
+    uint8_t data_[] = {0, '\0'};
+    data_[0] = data;
+    hal_usart_transmit((uint8_t*)data_);
 }
 
 // __attribute__((OS_main)) tells the compiler that this function never returns and
 // saves us precious space
 __attribute__((OS_main)) int main(void) {
 
-	hal_init(NULL);
-
-    hal_leds_set_status(bit(HAL_FLAG_BLUE_LED));
-
-    hal_spkr_beep(1000, 100, &callback);
+	hal_init(&recv);
 
 	uint8_t recv = 0;
     hal_spi_transfer(0b10000010);   // Send read h01 reg request
@@ -25,6 +23,8 @@ __attribute__((OS_main)) int main(void) {
     } else {
         hal_leds_set_status(hal_leds_get_status() | bit(HAL_FLAG_RED_LED));
     }
+
+    hal_usart_transmit((uint8_t*)"Hello world, I'm a Reader!\n");
 
     while(1);
 
