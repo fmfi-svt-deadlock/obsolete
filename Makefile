@@ -1,14 +1,22 @@
-MCU    = attiny841
+MCU	= attiny841
 
 # MCU frequency in Hz
-F_CPU  = 1000000
+F_CPU  = 8000000
 
-AVRDUDE_MCU       = t841
-AVRDUDE_PRG       = avrispmkii
+AVRDUDE_MCU	   = t841
+AVRDUDE_PRG	   = avrispmkii
 AVRDUDE_PRG_PORT  = usb
 
 # Speed of communication between programmer and MCU, see avrdude(1) for explanation
 AVRDUDE_BITCLOCK  = 10
+
+# MCU fuses (See ATTiny841 datasheet page 219 (23.2 Fuse Bits))
+# LFUSE diff to default: CKDIV8 unprogrammed
+MCU_LFUSE = 0xC2
+# HFUSE diff to default: none
+MCU_HFUSE = 0xDF
+# EFUSE diff to defualt: none
+MCU_EFUSE = 0xFF
 
 CC = avr-gcc
 
@@ -37,7 +45,7 @@ CFLAGS += -fno-tree-scev-cprop
 
 CFLAGS += -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 
-LDFLAGS = -lm -Wl,-gc-sections -Wl,--relax 
+LDFLAGS = -lm -Wl,-gc-sections -Wl,--relax
 
 SRCS = $(shell find -name '*.c')
 OBJS = $(SRCS:.c=.o)
@@ -63,6 +71,11 @@ main.elf: $(OBJS)
 chip_erase:
 	avrdude -p $(AVRDUDE_MCU) -c $(AVRDUDE_PRG) -P $(AVRDUDE_PRG_PORT) -B $(AVRDUDE_BITCLOCK) -e
 
+chip_prepare_fuses:
+	avrdude -p $(AVRDUDE_MCU) -c $(AVRDUDE_PRG) -P $(AVRDUDE_PRG_PORT) -B $(AVRDUDE_BITCLOCK) -U lfuse:w:$(MCU_LFUSE):m
+	avrdude -p $(AVRDUDE_MCU) -c $(AVRDUDE_PRG) -P $(AVRDUDE_PRG_PORT) -B $(AVRDUDE_BITCLOCK) -U hfuse:w:$(MCU_HFUSE):m
+	avrdude -p $(AVRDUDE_MCU) -c $(AVRDUDE_PRG) -P $(AVRDUDE_PRG_PORT) -B $(AVRDUDE_BITCLOCK) -U efuse:w:$(MCU_EFUSE):m
+
 chip_write_flash: main.hex
 	avrdude -p $(AVRDUDE_MCU) -c $(AVRDUDE_PRG) -P $(AVRDUDE_PRG_PORT) -B $(AVRDUDE_BITCLOCK) -U flash:w:main.hex:a
 
@@ -76,7 +89,7 @@ chip_write_eeprom: main.eep
 	fi
 
 chip_write: chip_write_flash chip_write_eeprom
-    
+
 open_terminal:
 	avrdude -p $(AVRDUDE_MCU) -c $(AVRDUDE_PRG) -P $(AVRDUDE_PRG_PORT) -t
 
