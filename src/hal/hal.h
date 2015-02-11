@@ -1,4 +1,5 @@
-// Contains includes of all HAL components and prototypes for initialization routines
+// Contains includes of all HAL components and prototypes for initialization
+// routines
 
 #ifndef __HAL_H
 #define __HAL_H

@@ -8,14 +8,14 @@ void recv(uint8_t data) {
     hal_usart_transmit((uint8_t*)data_);
 }
 
-// __attribute__((OS_main)) tells the compiler that this function never returns and
-// saves us precious space
+// __attribute__((OS_main)) tells the compiler that this function never
+// returns and saves us precious space
 __attribute__((OS_main)) int main(void) {
 
 	hal_init(&recv);
 
 	uint8_t recv = 0;
-    hal_spi_transfer(0b10000010);   // Send read h01 reg request
+    hal_spi_transfer(0x82);         // Send read h01 reg request
     recv = hal_spi_transfer(0x00);  // Dummy byte to receive data
 
     if (recv == 0x20) {

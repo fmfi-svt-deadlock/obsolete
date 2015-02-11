@@ -49,7 +49,8 @@ ISR(TIMER2_COMPA_vect) {
     }
 }
 
-void hal_spkr_beep(uint16_t frequency, uint16_t duration, void (*hal_spkr_beeped_callback)()) {
+void hal_spkr_beep(uint16_t frequency, uint16_t duration,
+                   void (*hal_spkr_beeped_callback)()) {
 
     beeped_callback = hal_spkr_beeped_callback;
 
@@ -73,9 +74,10 @@ void hal_spkr_beep(uint16_t frequency, uint16_t duration, void (*hal_spkr_beeped
 
         // Set output compare register of Timer1 to the tone period
         OCR1B = 500000 / frequency;
-        // Waweform generation mode 4 (Clear Timer on Compare) clears the timer
-        // on compare match with OCR1A. But we must use OCR1B if we want to
-        // toggle even TOCC (TOCC2). This is a hack so that timer will be cleared.
+        // Waweform generation mode 4 (Clear Timer on Compare) clears the
+        // timer on compare match with OCR1A. But we must use OCR1B if we
+        // want to toggle even TOCC (TOCC2). This is a hack so that timer
+        // will be cleared.
         OCR1A = 500000 / frequency;
 
         // Reenable interrupts

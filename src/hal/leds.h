@@ -5,7 +5,8 @@
 
 uint8_t hal_leds_init();
 
-// Return value and status value of these functions are a bitmasks where 1 means LED ON.
+// Return value and status value of these functions are a bitmasks where 1
+// means LED ON.
 uint8_t hal_leds_get_status();
 void hal_leds_set_status(uint8_t status);
 
