@@ -50,9 +50,9 @@ ISR(TIMER2_COMPA_vect) {
 }
 
 void hal_spkr_beep(uint16_t frequency, uint16_t duration,
-                   void (*hal_spkr_beeped_callback)()) {
+                   void (*spkr_beeped_callback)()) {
 
-    beeped_callback = hal_spkr_beeped_callback;
+    beeped_callback = spkr_beeped_callback;
 
     cli();
 

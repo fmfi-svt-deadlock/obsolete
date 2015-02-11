@@ -5,6 +5,10 @@
 #define __SPI_H
 
 uint8_t hal_spi_init();
+
+// This method sends one byte to the RFID-RC522. Every communication on SPI
+// consists of exchange of one byte, therefore this method returns received
+// byte in turn.
 uint8_t hal_spi_transfer(uint8_t data);
 
 #endif
