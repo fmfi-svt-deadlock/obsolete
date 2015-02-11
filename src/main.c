@@ -12,9 +12,9 @@ void recv(uint8_t data) {
 // returns and saves us precious space
 __attribute__((OS_main)) int main(void) {
 
-	hal_init(&recv);
+    hal_init(&recv);
 
-	uint8_t recv = 0;
+    uint8_t recv = 0;
     hal_spi_transfer(0x82);         // Send read h01 reg request
     recv = hal_spi_transfer(0x00);  // Dummy byte to receive data
 

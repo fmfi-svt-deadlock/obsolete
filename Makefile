@@ -1,10 +1,10 @@
-MCU    = attiny841
+MCU	= attiny841
 
 # MCU frequency in Hz
 F_CPU  = 8000000
 
-AVRDUDE_MCU       = t841
-AVRDUDE_PRG       = avrispmkii
+AVRDUDE_MCU	   = t841
+AVRDUDE_PRG	   = avrispmkii
 AVRDUDE_PRG_PORT  = usb
 
 # Speed of communication between programmer and MCU, see avrdude(1) for explanation
@@ -45,7 +45,7 @@ CFLAGS += -fno-tree-scev-cprop
 
 CFLAGS += -mmcu=$(MCU) -DF_CPU=$(F_CPU)
 
-LDFLAGS = -lm -Wl,-gc-sections -Wl,--relax 
+LDFLAGS = -lm -Wl,-gc-sections -Wl,--relax
 
 SRCS = $(shell find -name '*.c')
 OBJS = $(SRCS:.c=.o)
@@ -89,7 +89,7 @@ chip_write_eeprom: main.eep
 	fi
 
 chip_write: chip_write_flash chip_write_eeprom
-    
+
 open_terminal:
 	avrdude -p $(AVRDUDE_MCU) -c $(AVRDUDE_PRG) -P $(AVRDUDE_PRG_PORT) -t
 

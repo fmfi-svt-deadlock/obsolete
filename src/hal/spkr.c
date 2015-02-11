@@ -31,7 +31,7 @@ uint8_t hal_spkr_init() {
     // Enable Output Compare Interrupt for Output Compare A
     TIMSK2 |= bit(OCIE2A);
 
-	return 0;
+    return 0;
 }
 
 // Interrupt Service Routine for Timer2 Compare A

@@ -45,7 +45,7 @@
 // These values presume that the MCU clock is running at 8MHz
 
 // Sets the baud rate to 19200 bauds. Presumes usage of a Normal speed mode.
-#define USART_UBRR 	25
+#define USART_UBRR  25
 
 // Sets the frame format (1 start, 8 data, even parity, 1 stop bits)
 #define USART_FRAME (bit(UPM01) | bit(UCSZ00) | bit (UCSZ01))

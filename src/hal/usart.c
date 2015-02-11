@@ -28,7 +28,7 @@ uint8_t hal_usart_init(void (*usart_recv_callback)(uint8_t byte)) {
 
     recv_callback = usart_recv_callback;
 
-	return 0;
+    return 0;
 }
 
 void hal_usart_transmit(uint8_t *data) {

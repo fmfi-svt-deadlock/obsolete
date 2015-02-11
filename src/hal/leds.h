@@ -11,9 +11,9 @@ uint8_t hal_leds_get_status();
 void hal_leds_set_status(uint8_t status);
 
 enum hal_LedFlags {
-	HAL_FLAG_RED_LED	= 0,
-	HAL_FLAG_GREEN_LED	= 1,
-	HAL_FLAG_BLUE_LED 	= 2
+    HAL_FLAG_RED_LED    = 0,
+    HAL_FLAG_GREEN_LED  = 1,
+    HAL_FLAG_BLUE_LED   = 2
 };
 
 #endif
