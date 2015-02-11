@@ -44,7 +44,7 @@
 // https://github.com/fmfi-svt-gate/server/wiki/Controller-%E2%86%94-Reader-Protocol#hardware-layer
 // These values presume that the MCU clock is running at 8MHz
 
-// Sets the baud rate to 19 200 bauds. Presumes usage of a Normal speed mode.
+// Sets the baud rate to 19200 bauds. Presumes usage of a Normal speed mode.
 #define USART_UBRR 	25
 
 // Sets the frame format (1 start, 8 data, even parity, 1 stop bits)

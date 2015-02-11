@@ -29,4 +29,4 @@ The prepared targets are:
 
 You have to configure chip fuses just once. There is a `chip_prepare_fuses` target prepared for this. These settings differ from the factory default:
 
-- `CKVIV8` is unprogrammed (the internal clock won't be divided by 8 and the chip will run on 8MHz)
+- `CKDIV8` is unprogrammed (the internal clock won't be divided by 8 and the chip will run on 8MHz)

@@ -25,7 +25,7 @@ uint8_t hal_spi_transfer(uint8_t data) {
     // Transfer
     SPDR = data;
     // Wait
-    while(!is_set(SPSR, bit(SPIF)));
+    while(!is_set(SPSR, bit(SPIF))) ;
 
     // Unselect slave
     SPI_PORT |= bit(SPI_SS_PIN);

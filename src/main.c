@@ -26,6 +26,6 @@ __attribute__((OS_main)) int main(void) {
 
     hal_usart_transmit((uint8_t*)"Hello world, I'm a Reader!\n");
 
-    while(1);
+    while(1) ;
 
 }

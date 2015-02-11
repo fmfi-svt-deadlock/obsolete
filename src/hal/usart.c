@@ -9,6 +9,7 @@
 static void (*recv_callback)(uint8_t byte);
 
 ISR(USART0_RX_vect) {
+
     if (recv_callback != NULL) {
         recv_callback(UDR0);
     }
@@ -31,6 +32,7 @@ uint8_t hal_usart_init(void (*usart_recv_callback)(uint8_t byte)) {
 }
 
 void hal_usart_transmit(uint8_t *data) {
+
     while (*data != '\0') {
         UDR0 = *data;
         while(!is_set(UCSR0A, bit(UDRE0)));

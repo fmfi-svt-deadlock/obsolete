@@ -36,6 +36,7 @@ uint8_t hal_spkr_init() {
 
 // Interrupt Service Routine for Timer2 Compare A
 ISR(TIMER2_COMPA_vect) {
+
     // Stop the duration timer
     TCCR2B &= ~(bit(CS22) | bit(CS20));
     // Reset the duration timer
@@ -54,6 +55,8 @@ void hal_spkr_beep(uint16_t frequency, uint16_t duration,
 
     beeped_callback = spkr_beeped_callback;
 
+    // Disable interrupts. TCNT and OCR2A registers are 16 bit registers,
+    // consisting of 2 8-bit registers, updates of which must be atomic.
     cli();
 
     // Reset Timer/Counter 2
@@ -66,7 +69,6 @@ void hal_spkr_beep(uint16_t frequency, uint16_t duration,
     sei();
 
     if (frequency != 0) {
-        // Operations on these registers must be atomic, disable interrupts
         cli();
 
         // Reset Timer 1
@@ -89,5 +91,4 @@ void hal_spkr_beep(uint16_t frequency, uint16_t duration,
 
     // Start duration timer (/1024 prescaler)
     TCCR2B |= bit(CS22) | bit(CS20);
-
 }
