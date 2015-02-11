@@ -23,3 +23,10 @@ The prepared targets are:
 - `chip_write_eeprom`
 - `chip_write` (writes both flash and eeprom)
 - `open_terminal` (opens the AVRDUDE interactive terminal)
+- `chip_prepare_fuses` (one-time configuration for chip fuses)
+
+### Fuses configuration
+
+You have to configure chip fuses just once. There is a `chip_prepare_fuses` target prepared for this. These settings differ from the factory default:
+
+- `CKVIV8` is unprogrammed (the internal clock won't be divided by 8 and the chip will run on 8MHz)
