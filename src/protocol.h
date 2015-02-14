@@ -9,6 +9,12 @@ typedef struct {
     uint8_t data[256];
 } packet;
 
+typedef struct {
+    uint8_t rfid_status;
+    uint8_t led_status;
+    uint8_t sound_status;
+} Status;
+
 #define PROTOCOL_PACKET_ID_MAX  0x0D
 
 enum protocol_PacketIds {
