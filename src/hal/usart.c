@@ -31,11 +31,8 @@ uint8_t hal_usart_init(void (*usart_recv_callback)(uint8_t byte)) {
     return 0;
 }
 
-void hal_usart_transmit(uint8_t *data) {
+void hal_usart_transmit(uint8_t data) {
 
-    while (*data != '\0') {
-        UDR0 = *data;
-        while(!is_set(UCSR0A, bit(UDRE0)));
-        data++;
-    }
+    UDR0 = data;
+    while(!is_set(UCSR0A, bit(UDRE0)));
 }
