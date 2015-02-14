@@ -6,7 +6,7 @@
 typedef struct {
     uint8_t id;
     uint8_t length;
-    uint8_t *data;
+    uint8_t data[256];
 } packet;
 
 #define PROTOCOL_PACKET_ID_MAX  0x0D

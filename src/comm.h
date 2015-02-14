@@ -7,8 +7,9 @@
 
 // This function will block until a new packet is received or reception error
 // will occur.
-// Comm module has an internal buffer for one packet only. If another packets
-// arrives (or starts to arrive) the original unread packet will be lost.
+// Comm module has no internal buffer. If another packets
+// arrives (or starts to arrive) when this function is not being called
+// this packet will be lost (due to memory constraints).
 // Returns 0 if a packet was received, 1 on reception error
 uint8_t comm_wait_for_packet(packet *p);
 
