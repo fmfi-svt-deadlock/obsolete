@@ -7,7 +7,23 @@
 
 static packet p;
 
-// ACK/Status packet is an universal response to the most of the packets
+static uint16_t tone_buffer[16];
+static uint8_t tone_counter = 0;
+static uint8_t tone_max = 0;
+static uint8_t loop_forever = 0;
+
+static void beepCallback() {
+    if ((tone_counter == tone_max) && loop_forever) {
+        tone_counter = 0;
+    }
+    if (tone_counter < tone_max) {
+        hal_spkr_beep(tone_buffer[tone_counter*2],
+                      tone_buffer[(tone_counter*2)+1], &beepCallback);
+        tone_counter++;
+    }
+}
+
+// ACK/Status packet is an universal response to most of the packets
 static void sendACK() {
     Status *s = (Status*) p.data;
     // TODO: Checking periodically for RFID module health.
@@ -15,8 +31,7 @@ static void sendACK() {
     // Bit flags of leds used by the protocol and the HAL are intentionally
     // compatible
     s->led_status = hal_leds_get_status();
-    // TODO: Sound playback
-    s->sound_status = 0;
+    s->sound_status = (loop_forever ? 0xFF : (tone_max - tone_counter));
 
     p.id = packet_ACK;
     p.length = 3;
@@ -47,7 +62,14 @@ __attribute__((OS_main)) int main(void) {
                     sendACK();
                     break;
                 case packet_Beep:
-                    // TODO
+                    hal_spkr_killbeep();
+                    tone_counter = 0;
+                    tone_max = (p.length-1) / 4;
+                    for (uint8_t i = 0; i < (p.length-1); i += 2) {
+                        tone_buffer[i/2] = p.data[i] | (p.data[i+1] << 8);
+                    }
+                    loop_forever = p.data[p.length-1];
+                    beepCallback();
                     sendACK();
                     break;
                 case packet_RFIDSend:
