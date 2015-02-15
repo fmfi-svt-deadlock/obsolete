@@ -34,4 +34,7 @@ enum protocol_PacketIds {
     packet_RxError              = 0xFF
 };
 
+// Receive timeout is 90ms
+#define RECEIVE_TIMEOUT         9
+
 #endif
