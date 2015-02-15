@@ -9,6 +9,7 @@ void hal_init(void (*usart_recv_callback)(uint8_t byte)) {
     hal_spkr_init();
     hal_usart_init(usart_recv_callback);
     hal_spi_init();
+    hal_timer_init();
     // Reenable interrupts
     sei();
 }
