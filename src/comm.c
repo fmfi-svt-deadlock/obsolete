@@ -80,6 +80,11 @@ void comm_byte_received_callback(uint8_t byte) {
             rx_state = RxState_Length;
             break;
         case RxState_Length:
+            if (byte > 128) {
+                buffer_state = BufferState_Corrupt;
+                // TODO start ignoring bytes for the duration of a Receive
+                // timeout
+            }
             rx_remaining_data = byte;
             rx_packet->length = byte;
             rx_data_pointer = rx_packet->data;

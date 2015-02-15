@@ -26,15 +26,13 @@ static void beepCallback() {
 // ACK/Status packet is an universal response to most of the packets
 static void sendACK() {
     Status *s = (Status*) p.data;
-    // TODO: Checking periodically for RFID module health.
-    s->rfid_status = 0;
     // Bit flags of leds used by the protocol and the HAL are intentionally
     // compatible
     s->led_status = hal_leds_get_status();
     s->sound_status = (loop_forever ? 0xFF : (tone_max - tone_counter));
 
     p.id = packet_ACK;
-    p.length = 3;
+    p.length = 2;
     comm_transmit_packet(&p);
 }
 

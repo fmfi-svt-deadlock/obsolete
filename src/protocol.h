@@ -6,11 +6,10 @@
 typedef struct {
     uint8_t id;
     uint8_t length;
-    uint8_t data[256];
+    uint8_t data[128];
 } packet;
 
 typedef struct {
-    uint8_t rfid_status;
     uint8_t led_status;
     uint8_t sound_status;
 } Status;
