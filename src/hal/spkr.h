@@ -12,5 +12,6 @@ uint8_t hal_spkr_init();
 // is fast -- it mustn't block the interrupt handler for too long.
 void hal_spkr_beep(uint16_t frequency, uint16_t duration,
                    void (*spkr_beeped_callback)());
+void hal_spkr_killbeep();
 
 #endif

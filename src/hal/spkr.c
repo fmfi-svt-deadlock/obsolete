@@ -92,3 +92,10 @@ void hal_spkr_beep(uint16_t frequency, uint16_t duration,
     // Start duration timer (/1024 prescaler)
     TCCR2B |= bit(CS22) | bit(CS20);
 }
+
+void hal_spkr_killbeep() {
+    beeped_callback = NULL;
+    // Kill both timers
+    TCCR2B &= ~(bit(CS22) | bit(CS20));
+    TCCR1B &= ~(bit(CS11));
+}
