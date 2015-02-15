@@ -1,14 +1,11 @@
 #include "hal.h"
 #include "leds.h"
 
-uint8_t hal_leds_init() {
-
+void hal_leds_init() {
     // Set GPIO data direction on leds outputs
     LED_R_DDR |= bit(LED_R_PIN);
     LED_G_DDR |= bit(LED_G_PIN);
     LED_B_DDR |= bit(LED_B_PIN);
-
-    return 0;
 }
 
 uint8_t hal_leds_get_status() {

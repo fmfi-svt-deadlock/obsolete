@@ -3,7 +3,7 @@
 #ifndef __SPKR_H
 #define __SPKR_H
 
-uint8_t hal_spkr_init();
+void hal_spkr_init();
 
 // duration is in milliseconds, maximum length is 8 seconds
 // spkr_beeped_callback will be called when the beep finishes. This method
