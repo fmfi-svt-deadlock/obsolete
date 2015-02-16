@@ -7,7 +7,7 @@
 
 // We must store 2 packets: One we have previously sent (in case we need
 // to retransmit it) and one newly arriving.
-static packet p[2];
+static Packet p[2];
 // This distinguishes between those two packets
 static uint8_t current_packet = 0;
 
@@ -60,15 +60,15 @@ __attribute__((OS_main)) int main(void) {
     while(1) {
         if (comm_wait_for_packet(&p[current_packet]) == 0) {
             switch (p[current_packet].id) {
-                case packet_GetStatus:
+                case packet_GET_STATUS:
                     sendACK();
                     break;
-                case packet_SetLed:
+                case packet_SET_LED:
                     // Bit flags are compatible
                     hal_leds_set_status(p[current_packet].data[0]);
                     sendACK();
                     break;
-                case packet_Beep:
+                case packet_BEEP:
                     hal_spkr_killbeep();
                     tone_counter = 0;
                     tone_max = (p[current_packet].length-1) / 4;
@@ -82,31 +82,31 @@ __attribute__((OS_main)) int main(void) {
                     beepCallback();
                     sendACK();
                     break;
-                case packet_RFIDSend:
+                case packet_RFID_SEND:
                     // We will send data from this packet, and replace them
                     // in-place with what we receive
                     for (uint8_t i = 0; i < p[current_packet].length; i++) {
-                        p[current_packet].data[i] = 
+                        p[current_packet].data[i] =
                             hal_spi_transfer(p[current_packet].data[i]);
                     }
                     // And suddenly, we are a response packet :)
-                    p[current_packet].id = packet_RFIDSendComplete;
+                    p[current_packet].id = packet_RFID_SEND_COMPLETE;
                     transmit_and_flip();
                     break;
-                case packet_RxError:
+                case packet_RX_ERROR:
                     // Retransmit the last packet
                     comm_transmit_packet(&p[current_packet ^ 1]);
                     break;
                 default:
                     // Unacceptable packet was received in this mode
-                    p[current_packet].id = packet_InvalidPacket;
+                    p[current_packet].id = packet_INVALID_PACKET;
                     p[current_packet].length = 0;
                     transmit_and_flip();
                     break;
             }
         } else {
             // Reception error
-            p[current_packet].id = packet_RxError;
+            p[current_packet].id = packet_RX_ERROR;
             p[current_packet].length = 0;
             // Intentionally NOT using transmit_and_flip
             comm_transmit_packet(&p[current_packet]);

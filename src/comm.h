@@ -11,9 +11,9 @@
 // arrives (or starts to arrive) when this function is not being called
 // this packet will be lost (due to memory constraints).
 // Returns 0 if a packet was received, 1 on reception error
-uint8_t comm_wait_for_packet(packet *p);
+uint8_t comm_wait_for_packet(Packet *p);
 
-void comm_transmit_packet(packet *p);
+void comm_transmit_packet(Packet *p);
 
 // This function should be called by a hardware abstraction layer when
 // new byte is received.

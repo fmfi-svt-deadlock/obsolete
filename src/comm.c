@@ -6,21 +6,21 @@
 // State is named according to what byte we expect to arrive
 enum RxStates {
     RxState_ID          = 0,
-    RxState_Length      = 1,
-    RxState_Data        = 2,
-    RxState_Checksum    = 3,
-    RxState_Ignore      = 4,
+    RxState_LENGTH      = 1,
+    RxState_DATA        = 2,
+    RxState_CHECKSUM    = 3,
+    RxState_IGNORE      = 4,
 };
 
 enum BufferStates {
-    BufferState_Empty   = 0,
-    BufferState_Ready   = 1,    // Reception complete
-    BufferState_Corrupt = 2,    // There was a reception error
+    BufferState_EMPTY   = 0,
+    BufferState_READY   = 1,    // Reception complete
+    BufferState_CORRUPT = 2,    // There was a reception error
 };
 
 // Packet buffer and its status
-static volatile packet * volatile rx_packet = NULL;
-static volatile enum BufferStates buffer_state = BufferState_Empty;
+static volatile Packet * volatile rx_packet = NULL;
+static volatile enum BufferStates buffer_state = BufferState_EMPTY;
 
 // Receiver state machine status
 static volatile enum RxStates rx_state = RxState_ID;
@@ -29,7 +29,7 @@ static volatile uint8_t *rx_data_pointer = NULL;
 static volatile uint8_t rx_checksum = 0;
 static volatile uint8_t rx_blocked = 0;
 
-uint8_t comm_wait_for_packet(packet *p) {
+uint8_t comm_wait_for_packet(Packet *p) {
 
     while (rx_blocked) ;
 
@@ -41,17 +41,17 @@ uint8_t comm_wait_for_packet(packet *p) {
     rx_data_pointer = NULL;
     rx_checksum = 0;
 
-    while (buffer_state == BufferState_Empty) ;
+    while (buffer_state == BufferState_EMPTY) ;
 
     rx_packet = NULL;
 
     enum BufferStates state = buffer_state;
-    buffer_state = BufferState_Empty;
+    buffer_state = BufferState_EMPTY;
 
-    return state == BufferState_Ready ? 0 : 1;
+    return state == BufferState_READY ? 0 : 1;
 }
 
-void comm_transmit_packet(packet *p) {
+void comm_transmit_packet(Packet *p) {
 
     uint8_t checksum = 0;
 
@@ -74,8 +74,8 @@ void comm_transmit_packet(packet *p) {
 }
 
 static void receive_timeout() {
-    buffer_state = BufferState_Corrupt;
-    rx_state = RxState_Ignore;
+    buffer_state = BufferState_CORRUPT;
+    rx_state = RxState_IGNORE;
 }
 
 static void stop_ignoring() {
@@ -91,34 +91,34 @@ void comm_byte_received_callback(uint8_t byte) {
         case RxState_ID:
             hal_timer_start(RECEIVE_TIMEOUT, &receive_timeout);
             rx_packet->id = byte;
-            rx_state = RxState_Length;
+            rx_state = RxState_LENGTH;
             break;
-        case RxState_Length:
+        case RxState_LENGTH:
             if (byte > 128) {
                 hal_timer_stop();
-                buffer_state = BufferState_Corrupt;
+                buffer_state = BufferState_CORRUPT;
                 // We are ignoring bytes of a currupt packet
-                rx_state = RxState_Ignore;
+                rx_state = RxState_IGNORE;
                 rx_blocked = 1;
                 hal_timer_start(RECEIVE_TIMEOUT, &stop_ignoring);
             }
             rx_remaining_data = byte;
             rx_packet->length = byte;
             rx_data_pointer = rx_packet->data;
-            rx_state = rx_remaining_data != 0 ? RxState_Data : RxState_Checksum;
+            rx_state = rx_remaining_data != 0 ? RxState_DATA : RxState_CHECKSUM;
             break;
-        case RxState_Data:
+        case RxState_DATA:
             *rx_data_pointer = byte;
             rx_data_pointer++;
             rx_remaining_data--;
-            if (rx_remaining_data == 0) rx_state = RxState_Checksum;
+            if (rx_remaining_data == 0) rx_state = RxState_CHECKSUM;
             break;
-        case RxState_Checksum:
+        case RxState_CHECKSUM:
             hal_timer_stop();
-            if (rx_checksum == byte) buffer_state = BufferState_Ready;
-            else buffer_state = BufferState_Corrupt;
+            if (rx_checksum == byte) buffer_state = BufferState_READY;
+            else buffer_state = BufferState_CORRUPT;
             break;
-        case RxState_Ignore:
+        case RxState_IGNORE:
             // Ignore
             break;
     }
