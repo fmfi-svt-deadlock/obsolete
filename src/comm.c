@@ -23,10 +23,10 @@ static volatile Packet * volatile rx_packet = NULL;
 static volatile enum BufferStates buffer_state = BufferState_EMPTY;
 
 // Receiver state machine status
-static volatile enum RxStates rx_state = RxState_ID;
-static volatile uint8_t rx_remaining_data = 0;
-static volatile uint8_t *rx_data_pointer = NULL;
-static volatile uint8_t rx_checksum = 0;
+static volatile enum RxStates rx_state;
+static volatile uint8_t rx_remaining_data;
+static volatile uint8_t *rx_data_pointer;
+static volatile uint8_t rx_checksum;
 static volatile uint8_t rx_blocked = 0;
 
 uint8_t comm_wait_for_packet(Packet *p) {
@@ -87,7 +87,7 @@ void comm_byte_received_callback(uint8_t byte) {
 
     if (rx_packet == NULL) return;
 
-    switch(rx_state) {
+    switch (rx_state) {
         case RxState_ID:
             hal_timer_start(RECEIVE_TIMEOUT, &receive_timeout);
             rx_packet->id = byte;
