@@ -12,6 +12,7 @@
 #include "spkr.h"
 #include "usart.h"
 #include "spi.h"
+#include "timer.h"
 
 // ------ Hardware Abstraction Layer configuration ------ //
 
@@ -36,7 +37,7 @@
 #define SPKR_DDR   DDRA
 #define SPKR_PORT  PORTA
 #define SPKR_PIN   3
-// This module uses peripheral Timer/Counter 2
+// This module uses peripheral Timer/Counter 1 and 2
 
 // # USART
 // This module uses peripheral USART0
@@ -60,6 +61,9 @@
 #define SPI_SCK_PIN    4
 #define SPI_SS_PIN     7
 
+// # Timer
+// This module uses peripheral Timer/Counter 0
+
 // ------------------------------------------------------ //
 
 /**
@@ -69,8 +73,9 @@
   *  * Prepares timer for beeping
   *  * Prepares USART for communicating with the Controller
   *  * Prepares SPI for communicating with the RFID-RC552
+  *  * Prepares Low-precision timer for th receive timeout measurement
   */
-uint8_t hal_init(void (*usart_recv_callback)(uint8_t byte));
+void hal_init(void (*usart_recv_callback)(uint8_t byte));
 
 
 #endif

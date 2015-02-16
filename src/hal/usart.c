@@ -15,7 +15,7 @@ ISR(USART0_RX_vect) {
     }
 }
 
-uint8_t hal_usart_init(void (*usart_recv_callback)(uint8_t byte)) {
+void hal_usart_init(void (*usart_recv_callback)(uint8_t byte)) {
 
     // Set baud rate to 19 200 bauds
     UBRR0 = 25;
@@ -27,15 +27,10 @@ uint8_t hal_usart_init(void (*usart_recv_callback)(uint8_t byte)) {
     UCSR0C |= bit(UPM01) | bit(UCSZ00);
 
     recv_callback = usart_recv_callback;
-
-    return 0;
 }
 
-void hal_usart_transmit(uint8_t *data) {
+void hal_usart_transmit(uint8_t data) {
 
-    while (*data != '\0') {
-        UDR0 = *data;
-        while(!is_set(UCSR0A, bit(UDRE0)));
-        data++;
-    }
+    UDR0 = data;
+    while(!is_set(UCSR0A, bit(UDRE0)));
 }

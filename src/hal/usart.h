@@ -7,10 +7,10 @@
 // will be called from the interrupt handler. Make sure every global
 // variable changed by this method is defined as `volatile` and that this
 // is fast -- it mustn't block interrupt handler for too long.
-uint8_t hal_usart_init(void (*usart_recv_callback)(uint8_t byte));
+void hal_usart_init(void (*usart_recv_callback)(uint8_t byte));
 
-// This method transmits array of bytes until it encounters '\0'. This
-// method is blocking, so DON'T call it from interrupt handler.
-void hal_usart_transmit(uint8_t *data);
+// This method transmits one byte. It is blocking, so DON'T call it from
+// an interrupt handler.
+void hal_usart_transmit(uint8_t data);
 
 #endif

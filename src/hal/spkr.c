@@ -8,7 +8,7 @@
 
 static void (*beeped_callback)() = NULL;
 
-uint8_t hal_spkr_init() {
+void hal_spkr_init() {
 
     // -- Beeping timer initialization
     // Set speaker pin as output
@@ -30,8 +30,6 @@ uint8_t hal_spkr_init() {
     // -- Duration timer initialization
     // Enable Output Compare Interrupt for Output Compare A
     TIMSK2 |= bit(OCIE2A);
-
-    return 0;
 }
 
 // Interrupt Service Routine for Timer2 Compare A
@@ -91,4 +89,11 @@ void hal_spkr_beep(uint16_t frequency, uint16_t duration,
 
     // Start duration timer (/1024 prescaler)
     TCCR2B |= bit(CS22) | bit(CS20);
+}
+
+void hal_spkr_killbeep() {
+    beeped_callback = NULL;
+    // Kill both timers
+    TCCR2B &= ~(bit(CS22) | bit(CS20));
+    TCCR1B &= ~(bit(CS11));
 }

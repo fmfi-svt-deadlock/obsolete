@@ -3,7 +3,7 @@
 #ifndef __LEDS_H
 #define __LEDS_H
 
-uint8_t hal_leds_init();
+void hal_leds_init();
 
 // Return value and status value of these functions are a bitmasks where 1
 // means LED ON.

@@ -3,7 +3,7 @@
 #include "hal.h"
 #include "spi.h"
 
-uint8_t hal_spi_init() {
+void hal_spi_init() {
 
     // MOSI, SCK and SS as outputs
     SPI_DDR  |= bit(SPI_MOSI_PIN) | bit(SPI_SCK_PIN) | bit(SPI_SS_PIN);
@@ -13,8 +13,6 @@ uint8_t hal_spi_init() {
 
     // Enable SPI, Master, set clock rate fck / 16
     SPCR = bit(SPE) | bit(MSTR) | bit(SPR0);
-
-    return 0;
 }
 
 uint8_t hal_spi_transfer(uint8_t data) {
