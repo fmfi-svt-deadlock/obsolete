@@ -6,7 +6,7 @@
 #include "protocol.h"
 
 // This function will block until a new packet is received or reception error
-// will occur.
+// occurs.
 // Comm module has no internal buffer. If another packets
 // arrives (or starts to arrive) when this function is not being called
 // this packet will be lost (due to memory constraints).

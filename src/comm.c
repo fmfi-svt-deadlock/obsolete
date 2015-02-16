@@ -85,6 +85,9 @@ static void stop_ignoring() {
 
 void comm_byte_received_callback(uint8_t byte) {
 
+    // Wait until we stop ignoring incoming bytes (in case we have
+    // received a corrupted part of a packet and are ignoring the rest
+    // of the packet)
     if (rx_packet == NULL) return;
 
     switch (rx_state) {

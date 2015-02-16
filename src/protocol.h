@@ -14,8 +14,6 @@ typedef struct {
     uint8_t sound_status;
 } Status;
 
-#define PROTOCOL_PACKET_ID_MAX  0x0D
-
 enum protocol_PacketIds {
     packet_INVALID_PACKET        = 0x00,
     packet_ANSWER_TO_RESET       = 0x01,

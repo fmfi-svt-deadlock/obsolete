@@ -56,8 +56,8 @@ __attribute__((OS_main)) int main(void) {
     sendACK();
 
     // This is the main handling loop
-    // It handles all packets that can arrive in Normal or Degraded mode
-    while(1) {
+    // It handles all packets that can arrive in the Normal mode
+    while (1) {
         if (comm_wait_for_packet(&p[current_packet]) == 0) {
             switch (p[current_packet].id) {
                 case packet_GET_STATUS:
