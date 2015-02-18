@@ -85,10 +85,12 @@ __attribute__((OS_main)) int main(void) {
                 case packet_RFID_SEND:
                     // We will send data from this packet, and replace them
                     // in-place with what we receive
+                    hal_spi_begin_transaction();
                     for (uint8_t i = 0; i < p[current_packet].length; i++) {
                         p[current_packet].data[i] =
                             hal_spi_transfer(p[current_packet].data[i]);
                     }
+                    hal_spi_end_transaction();
                     // And suddenly, we are a response packet :)
                     p[current_packet].id = packet_RFID_SEND_COMPLETE;
                     transmit_and_flip();

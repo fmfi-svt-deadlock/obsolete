@@ -61,6 +61,10 @@
 #define SPI_SCK_PIN    4
 #define SPI_SS_PIN     7
 
+#define SPI_RC522_RST_DDR   DDRB
+#define SPI_RC522_RST_PORT  PORTB
+#define SPI_RC522_RST_PIN   1
+
 // # Timer
 // This module uses peripheral Timer/Counter 0
 
