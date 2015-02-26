@@ -3659,7 +3659,7 @@ This is the reduced ISP connector for AVR programming. Common on Arduino. This f
 <variantdefs>
 </variantdefs>
 <classes>
-<class number="0" name="default" width="0.6096" drill="0">
+<class number="0" name="default" width="0.3302" drill="1">
 </class>
 </classes>
 <parts>
@@ -3990,9 +3990,9 @@ select</text>
 <label x="25.4" y="55.88" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="PA3/PCINT3/ADC3/AIN10/TOCC2/T0/XCK0/SCK"/>
-<wire x1="68.58" y1="2.54" x2="81.28" y2="2.54" width="0.1524" layer="91"/>
-<label x="68.58" y="2.54" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="PA0/PCINT0/ADC0/AREF/MISO"/>
+<wire x1="68.58" y1="10.16" x2="81.28" y2="10.16" width="0.1524" layer="91"/>
+<label x="68.58" y="10.16" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="EXT_SPEAKER" class="0">
@@ -4010,9 +4010,9 @@ select</text>
 <label x="-30.48" y="40.64" size="1.778" layer="95"/>
 </segment>
 <segment>
-<pinref part="U$1" gate="G$1" pin="PA0/PCINT0/ADC0/AREF/MISO"/>
-<wire x1="68.58" y1="10.16" x2="81.28" y2="10.16" width="0.1524" layer="91"/>
-<label x="68.58" y="10.16" size="1.778" layer="95"/>
+<pinref part="U$1" gate="G$1" pin="PA3/PCINT3/ADC3/AIN10/TOCC2/T0/XCK0/SCK"/>
+<wire x1="68.58" y1="2.54" x2="81.28" y2="2.54" width="0.1524" layer="91"/>
+<label x="68.58" y="2.54" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="N$1" class="0">
