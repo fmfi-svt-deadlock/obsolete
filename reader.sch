@@ -4051,7 +4051,6 @@ select</text>
 </sheets>
 <errors>
 <approved hash="113,1,5.611,8.151,FRAME1,,,,,"/>
-<approved hash="113,1,1.65947,54.6976,JP2,,,,,"/>
 </errors>
 </schematic>
 </drawing>
